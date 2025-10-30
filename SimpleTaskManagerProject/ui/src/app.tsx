@@ -1,28 +1,17 @@
-import { useEffect, useState } from 'react';
-import type { SimpleTask } from '../models';
-import constants from './constants.ts';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../store/store.ts';
+import { fetchTasks } from '../store/tasksReducer.ts';
+import { CreateTask } from '../components/create-task.tsx';
 
 function App() {
-  const [data, setData] = useState<SimpleTask[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>('');
+  const dispatch = useDispatch<AppDispatch>();
+  const { get } = useSelector((s: RootState) => s.tasks);
+  const { loading, error, data } = get;
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(constants.getTasksEndpoint);
-        if (!response.ok) {
-          setError('unknown error');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch {
-        setError('unknown error');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   return (
     <>
@@ -50,6 +39,9 @@ function App() {
           </table>
         </div>
       )}
+      <div>
+        <CreateTask />
+      </div>
     </>
   );
 }
