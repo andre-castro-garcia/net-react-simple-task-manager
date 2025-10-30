@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTaskManagerProject", "SimpleTaskManagerProject.csproj", "{4C4135DB-216D-4041-A104-24699093F451}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTaskManagerProject", "SimpleTaskManagerProject\SimpleTaskManagerProject.csproj", "{B7CF59B9-EC11-4515-9BAF-145B0CDB1DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTaskManagerProject.Tests", "SimpleTaskManagerProject.Tests\SimpleTaskManagerProject.Tests.csproj", "{F71ABC0C-4802-4A69-88A8-B1CEC57C3E0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C4135DB-216D-4041-A104-24699093F451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C4135DB-216D-4041-A104-24699093F451}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C4135DB-216D-4041-A104-24699093F451}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C4135DB-216D-4041-A104-24699093F451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7CF59B9-EC11-4515-9BAF-145B0CDB1DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CF59B9-EC11-4515-9BAF-145B0CDB1DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CF59B9-EC11-4515-9BAF-145B0CDB1DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CF59B9-EC11-4515-9BAF-145B0CDB1DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71ABC0C-4802-4A69-88A8-B1CEC57C3E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71ABC0C-4802-4A69-88A8-B1CEC57C3E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71ABC0C-4802-4A69-88A8-B1CEC57C3E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71ABC0C-4802-4A69-88A8-B1CEC57C3E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
