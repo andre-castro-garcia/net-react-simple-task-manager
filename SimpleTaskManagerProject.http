@@ -1,0 +1,6 @@
+@SimpleTaskManagerProject_HostAddress = http://localhost:5218
+
+GET {{SimpleTaskManagerProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
