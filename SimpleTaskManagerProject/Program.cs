@@ -24,7 +24,7 @@ public class Program
             options.AddDefaultPolicy(
                 policy =>
                 {
-                    policy.AllowAnyOrigin();
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
         });
         builder.Services.AddMapster();
