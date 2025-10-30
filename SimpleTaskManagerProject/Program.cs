@@ -4,6 +4,7 @@ using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using SimpleTaskManagerProject.Api;
+using SimpleTaskManagerProject.Hubs;
 using SimpleTaskManagerProject.Infrastructure;
 using SimpleTaskManagerProject.Infrastructure.Mapping;
 using SimpleTaskManagerProject.Infrastructure.Validators;
@@ -31,7 +32,7 @@ public class Program
         builder.Services.AddDispatchR(Assembly.GetExecutingAssembly());
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+        builder.Services.AddSignalR();
 
         var app = builder.Build();
         if (app.Environment.IsDevelopment())
@@ -43,6 +44,7 @@ public class Program
         MappingConfig.Configure();
         
         app.RegisterRoutes();
+        app.MapHub<TasksHub>("/tasks-hub");
         app.UseCors();
         app.Run();
     }
