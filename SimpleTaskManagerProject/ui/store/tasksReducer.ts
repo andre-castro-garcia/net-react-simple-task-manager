@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type { SimpleTask } from '../models';
 import constants from '../src/constants';
 
@@ -55,7 +55,11 @@ export const createTask = createAsyncThunk(
 const tasksReducerSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {},
+  reducers: {
+    addTask(state, data: PayloadAction<SimpleTask>) {
+      state.get.data.push(data.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createTask.pending, (state) => {
@@ -65,7 +69,9 @@ const tasksReducerSlice = createSlice({
       .addCase(createTask.fulfilled, (state, action) => {
         state.create.loading = false;
         state.create.data = action.payload;
-        state.get.data.push(action.payload);
+        /* The list of tasks is updated from SignalR socket, in case disable
+        we can update the task list here directly*/
+        //state.get.data.push(action.payload);
       })
       .addCase(createTask.rejected, (state, action) => {
         state.create.loading = false;
@@ -85,5 +91,7 @@ const tasksReducerSlice = createSlice({
       });
   },
 });
+
+export const { addTask } = tasksReducerSlice.actions;
 
 export default tasksReducerSlice.reducer;
