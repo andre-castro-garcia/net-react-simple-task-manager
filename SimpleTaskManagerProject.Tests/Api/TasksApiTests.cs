@@ -87,4 +87,25 @@ public class TasksApiTests
             .Received(1)
             .Send(Arg.Any<GetAllTasksRequest>(), Arg.Any<CancellationToken>());
     }
+
+    [Test]
+    public async Task ShouldReturnSummary()
+    {
+        var client = _factory.CreateClientWithMocks();
+        _factory.MediatorMock
+            .Send(Arg.Any<SummarizeTasksRequest>(), Arg.Any<CancellationToken>())
+            .Returns(new ValueTask<string>("summary text"));
+        
+        var response = await client.GetAsync("/tasks/summary");
+        response.EnsureSuccessStatusCode();
+        
+        var payload = await response.Content.ReadFromJsonAsync<System.Collections.Generic.Dictionary<string, string>>();
+        payload.Should().NotBeNull();
+        payload!.TryGetValue("summary", out var summary).Should().BeTrue();
+        summary.Should().Be("summary text");
+        
+        await _factory.MediatorMock
+            .Received(1)
+            .Send(Arg.Any<SummarizeTasksRequest>(), Arg.Any<CancellationToken>());
+    }
 }

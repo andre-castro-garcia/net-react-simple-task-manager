@@ -6,6 +6,7 @@ import { CreateTask } from '../components/create-task.tsx';
 import * as signalR from '@microsoft/signalr';
 import constants from './constants.ts';
 import type { SimpleTask } from '../models';
+import { SummarizeTask } from '../components/summarize-tasks.tsx';
 
 function App() {
   const [connection, setConnection] = useState<signalR.HubConnection>();
@@ -65,6 +66,9 @@ function App() {
       )}
       <div>
         <CreateTask />
+      </div>
+      <div>
+        <SummarizeTask />
       </div>
     </>
   );

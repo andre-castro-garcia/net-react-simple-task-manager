@@ -37,5 +37,16 @@ public static class TasksApi
             })
             .WithName("GetTasks")
             .WithOpenApi();
+
+        app.MapGet("/tasks/summary", async (IMediator mediatr) =>
+            {
+                var summary = await mediatr.Send(new SummarizeTasksRequest(), CancellationToken.None);
+                return new {
+                    summary
+                };
+            })
+        .WithName("SummarizeTasks")
+        .WithOpenApi();
+
     }
 }

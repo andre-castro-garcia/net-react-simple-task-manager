@@ -3,6 +3,7 @@ using DispatchR.Extensions;
 using FluentValidation;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using OpenAI.Chat;
 using SimpleTaskManagerProject.Api;
 using SimpleTaskManagerProject.Hubs;
 using SimpleTaskManagerProject.Infrastructure;
@@ -36,6 +37,14 @@ public class Program
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddSignalR();
+        builder.Services.AddSingleton<ChatClient>(serviceProvider =>
+        {
+            var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+            const string model = "gpt-5-nano";
+
+            return new ChatClient(model, apiKey);
+        });
+        builder.Services.AddSingleton<SimpleTaskManagerProject.Infrastructure.Services.IChatService, SimpleTaskManagerProject.Infrastructure.Services.OpenAIChatService>();
 
         var app = builder.Build();
         if (app.Environment.IsDevelopment())
